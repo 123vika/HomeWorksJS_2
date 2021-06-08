@@ -263,7 +263,7 @@ let getRequest = (url) => {
     }
   }
   
-  const listContext = {
+  var listContext = {
     ProductsList: ProductItem,
     Cart: CartItem
   };
