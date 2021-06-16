@@ -14,10 +14,17 @@
     <div id="app">
         <header>
             <div class="logo">Интернет-магазин</div>
+        <div class="cart">
+            <search ref="search"></search>
+        
+            <cart ref="cart"></cart>
+        </div>
+
+            <!-- <div class="logo">Интернет-магазин</div>
             <div class="cart">
                 <form action="#" class="search-form">
                     <!-- <p>{{searchLine}}</p>  -->
-                    <input type="text" class="search-field" v-model="searchLine"> 
+                    <!-- <input type="text" class="search-field" v-model="searchLine"> 
                     <button class="btn-search" type="submit" @click="filterGoods">
                         <i class="fas fa-search"></i>
                     </button>
@@ -33,10 +40,9 @@
                         <p>{{product.price}}₽</p>
                         <button class="buy-btn" @click="addProduct(product)"></button>
                     </div>
-                </div>
+                </div> -->
 
-            </div>
-
+            <!-- </div>  -->
                 <!-- <div class="cart-item" data-id="${this.id_product}">
                     <div class="product-bio">
                     <img src="${this.img}" alt="Some image">
@@ -53,11 +59,14 @@
                 </div> -->
 
                 <!-- <div class="cart-block invisible"></div> -->
-            </div>
+            <!-- </div> -->
         </header>
 
         <main>
-            <div class="products">
+
+            <products ref="products"></products>
+
+            <!-- <div class="products">
                 <div class="product-item" v-for="product of products" :key="product.id_product">
                     <img :src="imgCatalog" alt="Some img">
                     <div class="desc">
@@ -67,8 +76,8 @@
                     </div>
                 </div>
 
-            </div>
-    
+            </div> -->
+            
         </main>
 
     </div>
@@ -77,12 +86,15 @@
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"
         integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous">
     </script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
-
-    <script src="./js/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <script src="./js/vue.js"></script> -->
     
     <!-- <script src="./js/script.js"></script> -->
     <!-- <script src="./js/homeWork_4.js"></script> --> 
+    <script src="./js/CartComponent.js"></script>
+    <script src="./js/ProductComponent.js"></script>
+    <script src="./js/SearchComponent.js"></script>
+
     <script src="./js/homeWork_5.js"></script>
 </body>
 

@@ -16,19 +16,19 @@
   // These helpers produce better VM code in JS engines due to their
   // explicitness and function inlining.
   function isUndef (v) {
-    return v === undefined || v === null
+    return v === undefined || v === null;
   }
 
   function isDef (v) {
-    return v !== undefined && v !== null
+    return v !== undefined && v !== null;
   }
 
   function isTrue (v) {
-    return v === true
+    return v === true;
   }
 
   function isFalse (v) {
-    return v === false
+    return v === false;
   }
 
   /**
@@ -41,7 +41,7 @@
       // $flow-disable-line
       typeof value === 'symbol' ||
       typeof value === 'boolean'
-    )
+    );
   }
 
   /**
@@ -50,7 +50,7 @@
    * is a JSON-compliant type.
    */
   function isObject (obj) {
-    return obj !== null && typeof obj === 'object'
+    return obj !== null && typeof obj === 'object';
   }
 
   /**
@@ -59,7 +59,7 @@
   var _toString = Object.prototype.toString;
 
   function toRawType (value) {
-    return _toString.call(value).slice(8, -1)
+    return _toString.call(value).slice(8, -1);
   }
 
   /**
@@ -67,11 +67,11 @@
    * for plain JavaScript objects.
    */
   function isPlainObject (obj) {
-    return _toString.call(obj) === '[object Object]'
+    return _toString.call(obj) === '[object Object]';
   }
 
   function isRegExp (v) {
-    return _toString.call(v) === '[object RegExp]'
+    return _toString.call(v) === '[object RegExp]';
   }
 
   /**
@@ -79,7 +79,7 @@
    */
   function isValidArrayIndex (val) {
     var n = parseFloat(String(val));
-    return n >= 0 && Math.floor(n) === n && isFinite(val)
+    return n >= 0 && Math.floor(n) === n && isFinite(val);
   }
 
   function isPromise (val) {
@@ -87,7 +87,7 @@
       isDef(val) &&
       typeof val.then === 'function' &&
       typeof val.catch === 'function'
-    )
+    );
   }
 
   /**
@@ -96,9 +96,9 @@
   function toString (val) {
     return val == null
       ? ''
-      : Array.isArray(val) || (isPlainObject(val) && val.toString === _toString)
-        ? JSON.stringify(val, null, 2)
-        : String(val)
+      : Array.isArray(val) || (isPlainObject(val) && val.toString === _toString);
+        ? JSON.stringify(val, null, 2);
+        : String(val);
   }
 
   /**
@@ -107,7 +107,7 @@
    */
   function toNumber (val) {
     var n = parseFloat(val);
-    return isNaN(n) ? val : n
+    return isNaN(n) ? val : n;
   }
 
   /**
@@ -125,7 +125,7 @@
     }
     return expectsLowerCase
       ? function (val) { return map[val.toLowerCase()]; }
-      : function (val) { return map[val]; }
+      : function (val) { return map[val]; };
   }
 
   /**
@@ -174,7 +174,7 @@
    */
   var camelizeRE = /-(\w)/g;
   var camelize = cached(function (str) {
-    return str.replace(camelizeRE, function (_, c) { return c ? c.toUpperCase() : ''; })
+    return str.replace(camelizeRE, function (_, c) { return c ? c.toUpperCase() : ''; });
   });
 
   /**
@@ -189,7 +189,7 @@
    */
   var hyphenateRE = /\B([A-Z])/g;
   var hyphenate = cached(function (str) {
-    return str.replace(hyphenateRE, '-$1').toLowerCase()
+    return str.replace(hyphenateRE, '-$1').toLowerCase();
   });
 
   /**
@@ -208,15 +208,15 @@
         ? l > 1
           ? fn.apply(ctx, arguments)
           : fn.call(ctx, a)
-        : fn.call(ctx)
+        : fn.call(ctx);
     }
 
     boundFn._length = fn.length;
-    return boundFn
+    return boundFn;
   }
 
   function nativeBind (fn, ctx) {
-    return fn.bind(ctx)
+    return fn.bind(ctx);
   }
 
   var bind = Function.prototype.bind
@@ -233,7 +233,7 @@
     while (i--) {
       ret[i] = list[i + start];
     }
-    return ret
+    return ret;
   }
 
   /**
@@ -243,7 +243,7 @@
     for (var key in _from) {
       to[key] = _from[key];
     }
-    return to
+    return to;
   }
 
   /**
@@ -256,7 +256,7 @@
         extend(res, arr[i]);
       }
     }
-    return res
+    return res;
   }
 
   /* eslint-disable no-unused-vars */
@@ -285,8 +285,8 @@
    */
   function genStaticKeys (modules) {
     return modules.reduce(function (keys, m) {
-      return keys.concat(m.staticKeys || [])
-    }, []).join(',')
+      return keys.concat(m.staticKeys || []);
+    }, []).join(',');
   }
 
   /**
@@ -294,7 +294,7 @@
    * if they are plain objects, do they have the same shape?
    */
   function looseEqual (a, b) {
-    if (a === b) { return true }
+    if (a === b) { return true; }
     var isObjectA = isObject(a);
     var isObjectB = isObject(b);
     if (isObjectA && isObjectB) {
@@ -303,29 +303,28 @@
         var isArrayB = Array.isArray(b);
         if (isArrayA && isArrayB) {
           return a.length === b.length && a.every(function (e, i) {
-            return looseEqual(e, b[i])
+            return looseEqual(e, b[i]);
           })
         } else if (a instanceof Date && b instanceof Date) {
-          return a.getTime() === b.getTime()
+          return a.getTime() === b.getTime();
         } else if (!isArrayA && !isArrayB) {
           var keysA = Object.keys(a);
           var keysB = Object.keys(b);
           return keysA.length === keysB.length && keysA.every(function (key) {
-            return looseEqual(a[key], b[key])
-          })
+            return looseEqual(a[key], b[key]);
+          });
         } else {
           /* istanbul ignore next */
-          return false
+          return false;
         }
       } catch (e) {
         /* istanbul ignore next */
-        return false
+        return false;
       }
     } else if (!isObjectA && !isObjectB) {
-      return String(a) === String(b)
+      return String(a) === String(b);
     } else {
-      return false
-    }
+      return false;
   }
 
   /**
@@ -337,7 +336,7 @@
     for (var i = 0; i < arr.length; i++) {
       if (looseEqual(arr[i], val)) { return i }
     }
-    return -1
+    return -1;
   }
 
   /**
@@ -350,7 +349,7 @@
         called = true;
         fn.apply(this, arguments);
       }
-    }
+    };
   }
 
   var SSR_ATTR = 'data-server-rendered';
@@ -488,7 +487,7 @@
    */
   function isReserved (str) {
     var c = (str + '').charCodeAt(0);
-    return c === 0x24 || c === 0x5F
+    return c === 0x24 || c === 0x5F;
   }
 
   /**
@@ -509,16 +508,16 @@
   var bailRE = new RegExp(("[^" + (unicodeRegExp.source) + ".$_\\d]"));
   function parsePath (path) {
     if (bailRE.test(path)) {
-      return
+      return;
     }
     var segments = path.split('.');
     return function (obj) {
       for (var i = 0; i < segments.length; i++) {
-        if (!obj) { return }
+        if (!obj) { return; }
         obj = obj[segments[i]];
       }
-      return obj
-    }
+      return obj;
+    };
   }
 
   /*  */
@@ -571,7 +570,7 @@
         _isServer = false;
       }
     }
-    return _isServer
+    return _isServer;
   };
 
   // detect devtools
@@ -579,7 +578,7 @@
 
   /* istanbul ignore next */
   function isNative (Ctor) {
-    return typeof Ctor === 'function' && /native code/.test(Ctor.toString())
+    return typeof Ctor === 'function' && /native code/.test(Ctor.toString());
   }
 
   var hasSymbol =
@@ -598,7 +597,7 @@
         this.set = Object.create(null);
       }
       Set.prototype.has = function has (key) {
-        return this.set[key] === true
+        return this.set[key] === true;
       };
       Set.prototype.add = function add (key) {
         this.set[key] = true;
@@ -645,7 +644,7 @@
 
     formatComponentName = function (vm, includeFile) {
       if (vm.$root === vm) {
-        return '<Root>'
+        return '<Root>';
       }
       var options = typeof vm === 'function' && vm.cid != null
         ? vm.options
@@ -662,7 +661,7 @@
       return (
         (name ? ("<" + (classify(name)) + ">") : "<Anonymous>") +
         (file && includeFile !== false ? (" at " + file) : '')
-      )
+      );
     };
 
     var repeat = function (str, n) {
@@ -672,7 +671,7 @@
         if (n > 1) { str += str; }
         n >>= 1;
       }
-      return res
+      return res;
     };
 
     generateComponentTrace = function (vm) {
@@ -685,7 +684,7 @@
             if (last.constructor === vm.constructor) {
               currentRecursiveSequence++;
               vm = vm.$parent;
-              continue
+              continue;
             } else if (currentRecursiveSequence > 0) {
               tree[tree.length - 1] = [last, currentRecursiveSequence];
               currentRecursiveSequence = 0;
@@ -698,7 +697,7 @@
           .map(function (vm, i) { return ("" + (i === 0 ? '---> ' : repeat(' ', 5 + i * 2)) + (Array.isArray(vm)
               ? ((formatComponentName(vm[0])) + "... (" + (vm[1]) + " recursive calls)")
               : formatComponentName(vm))); })
-          .join('\n')
+          .join('\n');
       } else {
         return ("\n\n(found in " + (formatComponentName(vm)) + ")")
       }
@@ -804,7 +803,7 @@
   // DEPRECATED: alias for componentInstance for backwards compat.
   /* istanbul ignore next */
   prototypeAccessors.child.get = function () {
-    return this.componentInstance
+    return this.componentInstance;
   };
 
   Object.defineProperties( VNode.prototype, prototypeAccessors );
