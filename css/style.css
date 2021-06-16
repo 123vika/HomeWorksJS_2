@@ -33,12 +33,6 @@ button:focus{
 .btn-cart, .logo{
     align-self: center;
 }
-/*.products {*/
-/*display: flex;*/
-/*justify-content: space-between;*/
-/*flex-wrap: wrap;*/
-/*padding: 40px 80px;*/
-/*}*/
 .products{
     column-gap: 30px;
     display: grid;
@@ -68,6 +62,7 @@ img {
 }
 .cart{
     position: relative;
+    display: flex;
 }
 .cart-block{
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.62);
@@ -170,5 +165,5 @@ img {
     border-bottom: 2px solid #fafafa;
 }
 .showCart{
-    display: block;
+    display: flex;
 }
