@@ -1,7 +1,7 @@
 Vue.component('cart', {
     data(){
       return {
-          imgCart: 'https://via.placeholder.com/100x150',
+          imgCart: 'https://via.placeholder.com/90x150',
           cartUrl: '/getBasket.json',
           cartItems: [],
           showCart: false,
@@ -70,11 +70,11 @@ Vue.component('cart-item', {
                         <div class="product-desc">
                             <p class="product-title">{{cartItem.product_name}}</p>
                             <p class="product-quantity">Количество: {{cartItem.quantity}}</p>
-                            <p class="product-single-price">{{cartItem.price}}₽ за единицу</p>
+                            <p class="product-single-price">{{cartItem.price}}₽ за шт.</p>
                         </div>
                     </div>
                     <div class="right-block">
-                        <p class="product-price">{{cartItem.quantity*cartItem.price}}₽</p>
+                        <p class="product-price">{{cartItem.quantity*cartItem.price}}</p>
                         <button class="del-btn" @click="$emit('remove', cartItem)">&times;</button>
                     </div>
                 </div>
