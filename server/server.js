@@ -14,10 +14,7 @@ app.use('/', express.static('./public')); // запросы в корень на
 app.get('/api/products', (req, res) => {
   fs.readFile('./server/db/products.json', 'utf-8', (err, data) => {
     if (err) {
-      res.send(JSON.stringify({
-        result: 0,
-        text: err
-      }));
+      res.send(JSON.stringify({result: 0, text: err}));
     } else {
       res.send(data);
     }
@@ -30,10 +27,7 @@ app.get('/api/products', (req, res) => {
 app.get('/api/cart', (req, res) => {
   fs.readFile('./server/db/userCart.json', 'utf-8', (err, data) => {
     if (err) {
-      res.send({
-        result: 0,
-        text: err
-      });
+      res.send({result: 0, text: err});
     } else {
       res.send(data);
     }
@@ -44,10 +38,7 @@ app.get('/api/cart', (req, res) => {
 app.post('/api/cart', (req, res) => {
   fs.readFile('./server/db/userCart.json', 'utf-8', (err, data) => {
     if (err) {
-      res.sendStatus(404, JSON.stringify({
-        result: 0,
-        text: err
-      }));
+      res.sendStatus(404, JSON.stringify({result: 0, text: err}));
     } else {
       // парсим текущую корзину
       const cart = JSON.parse(data);
@@ -69,17 +60,14 @@ app.post('/api/cart', (req, res) => {
 app.put('/api/cart/:id', (req, res) => {
   fs.readFile('./server/db/userCart.json', 'utf-8', (err, data) => {
     if (err) {
-      res.sendStatus(404, JSON.stringify({
-        result: 0,
-        text: err
-      }));
+      res.sendStatus(404, JSON.stringify({result: 0, text: err}));
     } else {
       // парсим текущую корзину
       const cart = JSON.parse(data);
       // ищем товар по id
       const find = cart.contents.find(el => el.id_product === +req.params.id);
       // изменяем количество
-      find.quantity += 2;
+      find.quantity += req.body.quantity;
       // пишем обратно
       fs.writeFile('./server/db/userCart.json', JSON.stringify(cart), (err) => {
         if (err) {
@@ -91,34 +79,6 @@ app.put('/api/cart/:id', (req, res) => {
     }
   });
 });
-
-
-
-// app.delete('/api/cart/:id', (req, res) => {
-//   fs.readFile('./server/db/userCart.json', 'utf-8', (err, data) => {
-//     if (err) {
-//       res.sendStatus(404, JSON.stringify({
-//         result: 0,
-//         text: err
-//       }));
-//     } else {
-//       // парсим текущую корзину
-//       const cart = JSON.parse(data);
-//       // ищем товар по id
-//       const find = cart.contents.find(el => el.id_product === +req.params.id);
-//       // изменяем количество
-//       find.quantity = 0;
-//       // пишем обратно
-//       fs.writeFile('./server/db/userCart.json', JSON.stringify(cart), (err) => {
-//         if (err) {
-//           res.send('{"result": 0}');
-//         } else {
-//           res.send('{"result": 1}');
-//         }
-//       });
-//     }
-//   });
-// });
 
 /**
  * Запуск сервера
